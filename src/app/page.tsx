@@ -1,103 +1,54 @@
+import BrandLogo from "@/../public/Logo/Logo_Red_1/Standard_400px-W/RED/Digital_Digitizers_Red_Logo_Square_Transparent.png";
+import { getAllServices__SA } from "@/backend/Admin";
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+export default async function LandingPage() {
+    const services = await getAllServices__SA();
+    return (
+        <main>
+            <header className="bg-[linear-gradient(to_right,#00c6ff,#0072ff)] p-[100px_10%] lg:p-[100px_15%] min-h-[30vh] text-white flex flex-col lg:flex-row lg:gap-[100px] fontTimes items-center">
+                <Image
+                    alt="Brand Logo"
+                    src={BrandLogo}
+                    className="object-contain lg:flex-1/3"
+                />
+                <div className="flex flex-col gap-[20px] lg:flex-2/3">
+                    <h1 className="text-[calc(20px+3vw)] lg:text-[calc(30px+2vw)]">
+                        Next-gen digital Power house.
+                    </h1>
+                    <p className="text-[#FFFB] text-[18px]">
+                        India&apos;s No.1 Digital Marketing Company
+                    </p>
+                    <a
+                        href="/contact"
+                        className="bg-[#FFF3] hover:bg-[#FFF5] text-[25px] w-min whitespace-nowrap p-[7px_60px] rounded-full border-[2px] hover:border-white border-transparent"
+                    >
+                        Contact us
+                    </a>
+                </div>
+            </header>
+            <section className="lg:p-[50px_20%] p-[50px_5%]">
+                <h1 className=" font-bold text-[30px]">Services</h1>
+                <br />
+                <div className="responsiveGrid">
+                    {services.map((ele, idx) => (
+                        <div
+                            className="bg-[#ddd] rounded-lg overflow-hidden flex-1 border-2"
+                            key={idx}
+                        >
+                            {ele.posterLink ? (
+                                <img
+                                    src={ele.posterLink}
+                                    className="w-[100%] object-fill"
+                                />
+                            ) : null}
+                            <div className="p-[20px]">
+                                <b className="text-[22px]">{ele.title}</b>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        </main>
+    );
 }
