@@ -2,6 +2,8 @@ import BrandLogo from "@/../public/Logo/Logo_Red_1/Standard_400px-W/RED/Digital_
 import { getAllServices__SA } from "@/backend/Admin";
 import Image from "next/image";
 
+export const revalidate = 1 * 60;
+
 export default async function LandingPage() {
     const services = await getAllServices__SA();
     return (
