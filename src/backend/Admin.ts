@@ -1,6 +1,7 @@
 "use server";
 import { getMongoDBModels } from "@/database/connection";
 import { IService } from "@/database/Services.Collection";
+import { revalidatePath } from "next/cache";
 
 export const createUpdateService__Admin_SA = async ({
     id,
@@ -23,6 +24,7 @@ export const createUpdateService__Admin_SA = async ({
         } else {
             await ServiceModel.create([{ description, posterLink, title }]);
         }
+        revalidatePath("/");
         return true;
     } catch (err) {
         console.error(err);
